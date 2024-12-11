@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIS Portfolio</title>
+    <link rel="stylesheet" href="D:\Data\styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
+	<script src="D:Data\Pakistan.geojson"></script>
+	<script src="D:Data\Pakistan_Provinces.geojson"></script>
+	<style>
+        .logo {
+            position: absolute;
+            top: 10px;
+            right: 30px;
+            width: 100px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1> Awais Sajid's GIS Portfolio</h1>
+		 <img src="D:\Data\Department Logo.png" alt="Department Logo" class="logo" id="departmentLogo">
+        <nav>
+            <ul>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <p>My name is Awais Sajid, a GIS Analyst with expertise in Space Science and Remote Sensing. I specialize in geospatial data analysis, visualization, and web GIS development.</p>
+        <ul>
+            <li>BSc Space Science, University of the Punjab</li>
+            <li>Technical Skills: ArcGIS, Leaflet, Python, Power BI, SQL</li>
+            <li>Interests: Environmental Preservation, Coding, GIS Research</li>
+        </ul>
+    </section>
+
+    <section id="projects">
+        <h2>GIS Projects</h2>
+        <div id="map" style="width: 100%; height: 500px; background: #f0f0f0;"></div>
+        <script>
+            const map = L.map('map').setView([31.49418365515508, 74.29314095283483], 10); 
+
+            // Add OpenStreetMap layer
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            // Marker
+            L.marker([31.49418365515508, 74.29314095283483]).addTo(map)
+                .bindPopup('<b>Space Science Department</b><br>University of the Punjab.')
+                .openPopup();
+
+            
+            var country = L.geoJSON(Pakistan, {
+    style: {
+        fillColor: 'green',
+        fillOpacity: 1,
+        color: '#fff',
+        weight: 2
+    },
+    onEachFeature: function(feature, layer) {
+        layer.bindPopup("Pakistan"); 
+    }
+}).addTo(map);
+    var provinces = L.geoJSON(Provinces, {
+        onEachFeature: function (feature, layer) {
+            layer.bindPopup( feature.properties.ADM1_EN)
+        },
+        style: {
+            fillColor: 'green',
+            fillOpacity: 1,
+            color: '#fff',
+        }
+    }).addTo(map);
+        </script>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <p>Email: <a href="mailto:awaissajid661@gmail.com">awaissajid661@gmail.com</a></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/awais-sajid2001" target="_blank">Awais Sajid</a></p>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Awais Sajid. All rights reserved.</p>
+    </footer>
+</body>
+</html>
