@@ -7,9 +7,7 @@
     <link rel="stylesheet" href="https://raw.githubusercontent.com/awais-sajid1940/My-Personal-Data/main/styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
-	<script src="https://raw.githubusercontent.com/awais-sajid1940/My-Personal-Data/main/Pakistan.geojson"></script>
-	<script src="https://raw.githubusercontent.com/awais-sajid1940/My-Personal-Data/main/Pakistan_Provinces.geojson"></script>
-	<style>
+    <style>
         .logo {
             position: absolute;
             top: 10px;
@@ -21,8 +19,8 @@
 </head>
 <body>
     <header>
-        <h1> Awais Sajid's GIS Portfolio</h1>
-		 <img src="https://raw.githubusercontent.com/awais-sajid1940/My-Personal-Data/main/Department Logo.png.jpg" alt="Department Logo" class="logo" id="departmentLogo">
+        <h1>Awais Sajid's GIS Portfolio</h1>
+        <img src="https://raw.githubusercontent.com/awais-sajid1940/My-Personal-Data/main/Department%20Logo.png.jpg" alt="Department Logo" class="logo" id="departmentLogo">
         <nav>
             <ul>
                 <li><a href="#about">About Me</a></li>
@@ -46,6 +44,7 @@
         <h2>GIS Projects</h2>
         <div id="map" style="width: 100%; height: 500px; background: #f0f0f0;"></div>
         <script>
+            // Initialize the map
             const map = L.map('map').setView([31.49418365515508, 74.29314095283483], 10); 
 
             // Add OpenStreetMap layer
@@ -54,33 +53,43 @@
                 attribution: '© OpenStreetMap contributors'
             }).addTo(map);
 
-            // Marker
+            // Add marker
             L.marker([31.49418365515508, 74.29314095283483]).addTo(map)
                 .bindPopup('<b>Space Science Department</b><br>University of the Punjab.')
                 .openPopup();
 
-            
-            var country = L.geoJSON(Pakistan, {
-    style: {
-        fillColor: 'green',
-        fillOpacity: 1,
-        color: '#fff',
-        weight: 2
-    },
-    onEachFeature: function(feature, layer) {
-        layer.bindPopup("Pakistan"); 
-    }
-}).addTo(map);
-    var provinces = L.geoJSON(Provinces, {
-        onEachFeature: function (feature, layer) {
-            layer.bindPopup( feature.properties.ADM1_EN)
-        },
-        style: {
-            fillColor: 'green',
-            fillOpacity: 1,
-            color: '#fff',
-        }
-    }).addTo(map);
+            // Load GeoJSON files
+            fetch("https://raw.githubusercontent.com/awais-sajid1940/My-Personal-Data/main/Pakistan.geojson")
+                .then(response => response.json())
+                .then(data => {
+                    L.geoJSON(data, {
+                        style: {
+                            fillColor: 'green',
+                            fillOpacity: 0.5,
+                            color: '#fff',
+                            weight: 1
+                        },
+                        onEachFeature: function (feature, layer) {
+                            layer.bindPopup("Pakistan");
+                        }
+                    }).addTo(map);
+                });
+
+            fetch("https://raw.githubusercontent.com/awais-sajid1940/My-Personal-Data/main/Pakistan_Provinces.geojson")
+                .then(response => response.json())
+                .then(data => {
+                    L.geoJSON(data, {
+                        style: {
+                            fillColor: 'blue',
+                            fillOpacity: 0.5,
+                            color: '#fff',
+                            weight: 1
+                        },
+                        onEachFeature: function (feature, layer) {
+                            layer.bindPopup(feature.properties.ADM1_EN);
+                        }
+                    }).addTo(map);
+                });
         </script>
     </section>
 
