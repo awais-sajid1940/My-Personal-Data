@@ -20,7 +20,7 @@
 <body>
     <header>
         <h1>Awais Sajid's GIS Portfolio</h1>
-        <img src="Department Logo" class="logo" id="departmentLogo">
+        <img src="D:\Data\Department Logo.png" alt="Department Logo" class="logo" id="departmentLogo">
         <nav>
             <ul>
                 <li><a href="#about">About Me</a></li>
@@ -59,7 +59,7 @@
                 .openPopup();
 
             // Load GeoJSON files
-            fetch("https://raw.githubusercontent.com/awais-sajid1940/My-Personal-Data/main/Pakistan.geojson")
+            fetch("Pakistan.geojson")
                 .then(response => response.json())
                 .then(data => {
                     L.geoJSON(data, {
@@ -75,7 +75,7 @@
                     }).addTo(map);
                 });
 
-            fetch("https://raw.githubusercontent.com/awais-sajid1940/My-Personal-Data/main/Pakistan_Provinces.geojson")
+            fetch("Pakistan_Provinces.geojson")
                 .then(response => response.json())
                 .then(data => {
                     L.geoJSON(data, {
