@@ -76,25 +76,25 @@
             
             var country = L.geoJSON(Pakistan, {
     style: {
-        fillColor: 'green',
-        fillOpacity: 1,
+        fillColor: 'blue',
+        fillOpacity: 0.6,
         color: '#fff',
         weight: 2
     },
     onEachFeature: function(feature, layer) {
-        layer.bindPopup("Pakistan"); 
+        layer.bindPopup("Pakistan").openPopup(); 
     }
 }).addTo(map);
 
 
     var provinces = L.geoJSON(Provinces, {
         onEachFeature: function (feature, layer) {
-            layer.bindPopup( feature.properties.ADM1_EN)
+            layer.bindPopup( feature.properties.ADM1_EN).openPopup()
         },
         style: {
-            fillColor: 'blue',
-            fillOpacity: 5,
-            color: '#fff',
+            fillColor: 'green',
+            fillOpacity: 0.5,
+            color: '#000000',
         }
     }).addTo(map);
 	
